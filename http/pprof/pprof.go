@@ -24,6 +24,10 @@ func init() {
 }
 
 func Heap(w http.ResponseWriter, r *http.Request) {
+	gc, _ := strconv.Atoi(r.FormValue("gc"))
+	if gc > 0 {
+		runtime.GC()
+	}
 	WriteDeltaProfile(&deltaHeapProfiler, "heap", w, r)
 }
 
@@ -37,10 +41,6 @@ func Mutex(w http.ResponseWriter, r *http.Request) {
 
 func WriteDeltaProfile(p deltaProfiler, name string, w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("X-Content-Type-Options", "nosniff")
-	gc, _ := strconv.Atoi(r.FormValue("gc"))
-	if gc > 0 {
-		runtime.GC()
-	}
 	w.Header().Set("Content-Type", "application/octet-stream")
 	w.Header().Set("Content-Disposition", fmt.Sprintf(`attachment; filename="%s.pprof.gz"`, name))
 	_ = p.Profile(w)
