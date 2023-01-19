@@ -9,9 +9,9 @@ import (
 	"strconv"
 )
 
-var deltaHeapProfiler = delta.NewHeapProfiler()
-var deltaBlockProfiler = delta.NewBlockProfiler()
-var deltaMutexProfiler = delta.NewMutexProfiler()
+var deltaHeapProfiler = godeltaprof.NewHeapProfiler()
+var deltaBlockProfiler = godeltaprof.NewBlockProfiler()
+var deltaMutexProfiler = godeltaprof.NewMutexProfiler()
 
 type deltaProfiler interface {
 	Profile(w io.Writer) error
