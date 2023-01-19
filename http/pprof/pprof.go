@@ -24,10 +24,6 @@ func init() {
 }
 
 func Heap(w http.ResponseWriter, r *http.Request) {
-	gc, _ := strconv.Atoi(r.FormValue("gc"))
-	if gc > 0 {
-		runtime.GC()
-	}
 	WriteDeltaProfile(&deltaHeapProfiler, "heap", w, r)
 }
 
