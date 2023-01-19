@@ -3,6 +3,7 @@
 
 package pprof
 
+// unsafe is required for go:linkname
 import _ "unsafe"
 
 //go:linkname runtime_expandFinalInlineFrame runtime/pprof.runtime_expandFinalInlineFrame

@@ -28,18 +28,18 @@ func Heap(w http.ResponseWriter, r *http.Request) {
 	if gc > 0 {
 		runtime.GC()
 	}
-	WriteDeltaProfile(&deltaHeapProfiler, "heap", w, r)
+	writeDeltaProfile(deltaHeapProfiler, "heap", w)
 }
 
 func Block(w http.ResponseWriter, r *http.Request) {
-	WriteDeltaProfile(&deltaBlockProfiler, "block", w, r)
+	writeDeltaProfile(deltaBlockProfiler, "block", w)
 }
 
 func Mutex(w http.ResponseWriter, r *http.Request) {
-	WriteDeltaProfile(&deltaMutexProfiler, "mutex", w, r)
+	writeDeltaProfile(deltaMutexProfiler, "mutex", w)
 }
 
-func WriteDeltaProfile(p deltaProfiler, name string, w http.ResponseWriter, r *http.Request) {
+func writeDeltaProfile(p deltaProfiler, name string, w http.ResponseWriter) {
 	w.Header().Set("X-Content-Type-Options", "nosniff")
 	w.Header().Set("Content-Type", "application/octet-stream")
 	w.Header().Set("Content-Disposition", fmt.Sprintf(`attachment; filename="%s.pprof.gz"`, name))

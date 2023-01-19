@@ -13,11 +13,11 @@ type BlockProfiler struct {
 	scaleProfile   func(int64, float64) (int64, float64)
 }
 
-func NewMutexProfiler() BlockProfiler {
-	return BlockProfiler{runtimeProfile: runtime.MutexProfile, scaleProfile: scaleMutexProfile}
+func NewMutexProfiler() *BlockProfiler {
+	return &BlockProfiler{runtimeProfile: runtime.MutexProfile, scaleProfile: scaleMutexProfile}
 }
-func NewBlockProfiler() BlockProfiler {
-	return BlockProfiler{runtimeProfile: runtime.BlockProfile, scaleProfile: scaleBlockProfile}
+func NewBlockProfiler() *BlockProfiler {
+	return &BlockProfiler{runtimeProfile: runtime.BlockProfile, scaleProfile: scaleBlockProfile}
 }
 
 func (d *BlockProfiler) Profile(w io.Writer) error {

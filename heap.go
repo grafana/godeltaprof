@@ -10,8 +10,8 @@ type HeapProfiler struct {
 	impl pprof.DeltaHeapProfiler
 }
 
-func NewHeapProfiler() HeapProfiler {
-	return HeapProfiler{}
+func NewHeapProfiler() *HeapProfiler {
+	return &HeapProfiler{}
 }
 
 func (d *HeapProfiler) Profile(w io.Writer) error {
