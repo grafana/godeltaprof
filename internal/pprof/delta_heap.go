@@ -55,11 +55,11 @@ func (d *DeltaHeapProfiler) WriteHeapProto(w io.Writer, p []runtime.MemProfileRe
 			// it is a fresh bucket and it will be published after next 1-2 gc cycles
 			continue
 		}
-		size := int64(0)
-		if r.AllocObjects != 0 {
-			size = r.AllocBytes / r.AllocObjects
+		var blockSize int64
+		if r.AllocObjects > 0 {
+			blockSize = r.AllocBytes / r.AllocObjects
 		}
-		entry := d.m.Lookup(r.Stack(), uintptr(size))
+		entry := d.m.Lookup(r.Stack(), uintptr(blockSize))
 
 		if (r.AllocObjects - entry.count.v1) < 0 {
 			continue
@@ -76,10 +76,6 @@ func (d *DeltaHeapProfiler) WriteHeapProto(w io.Writer, p []runtime.MemProfileRe
 			continue
 		}
 
-		var blockSize int64
-		if r.AllocObjects > 0 {
-			blockSize = r.AllocBytes / r.AllocObjects
-		}
 		b.pbSample(values, locs, func() {
 			if blockSize != 0 {
 				b.pbLabel(tagSample_Label, "bytes", "", blockSize)
