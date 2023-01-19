@@ -22,7 +22,7 @@ func TestSignatureCyclesPerSecond(t *testing.T) {
 		"func runtime/pprof.runtime_cyclesPerSecond() int64")
 	checkSignature(t, "github.com/pyroscope-io/godeltaprof/internal/pprof",
 		"runtime_cyclesPerSecond",
-		"func github.com/pyroscope-io/godeltaprof/internal2/pprof.runtime_cyclesPerSecond() int64")
+		"func github.com/pyroscope-io/godeltaprof/internal/pprof.runtime_cyclesPerSecond() int64")
 }
 
 func checkSignature(t *testing.T, pkg string, name string, expectedSignature string) {
