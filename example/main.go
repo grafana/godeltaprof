@@ -3,13 +3,14 @@ package main
 import (
 	"bytes"
 	"fmt"
-	"github.com/pyroscope-io/godeltaprof"
-	_ "github.com/pyroscope-io/godeltaprof/http/pprof"
 	"net/http"
 	_ "net/http/pprof"
 	"runtime"
 	"sync"
 	"time"
+
+	"github.com/pyroscope-io/godeltaprof"
+	_ "github.com/pyroscope-io/godeltaprof/http/pprof"
 )
 
 //go:noinline
