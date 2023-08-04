@@ -2,9 +2,10 @@ package compat
 
 import (
 	"go/types"
-	"golang.org/x/tools/go/packages"
 	"strings"
 	"testing"
+
+	"golang.org/x/tools/go/packages"
 )
 
 func TestSignatureExpandFinalInlineFrame(t *testing.T) {
